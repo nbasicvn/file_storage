@@ -115,7 +115,7 @@ func main() {
 }
 func DirHandler(w http.ResponseWriter, r *http.Request) {
 	user, err := getUserFromDomain(r.Host)
-	//fmt.Println(user)
+
 	if err != nil {
 		w.WriteHeader(http.StatusForbidden)
 		_ = json.NewEncoder(w).Encode(err)

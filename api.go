@@ -17,7 +17,6 @@ import (
 
 func UploadSingleFile(w http.ResponseWriter, r *http.Request) {
 	u, err := getUser(r.FormValue("user"))
-	fmt.Println(u)
 
 	_ = r.ParseMultipartForm(32 << 20)
 
@@ -76,7 +75,6 @@ func UploadSingleFile(w http.ResponseWriter, r *http.Request) {
 
 func UploadTempFile(w http.ResponseWriter, r *http.Request) {
 	u, err := getUser(r.FormValue("user"))
-	fmt.Println(u)
 
 	_ = r.ParseMultipartForm(32 << 20)
 
@@ -132,7 +130,7 @@ func UploadTempFile(w http.ResponseWriter, r *http.Request) {
 
 func UploadCommonFile(w http.ResponseWriter, r *http.Request) {
 	u, err := getUser(r.FormValue("user"))
-	fmt.Println(u)
+
 	_ = r.ParseMultipartForm(32 << 20)
 
 	slug := r.FormValue("slug")
@@ -192,7 +190,7 @@ func UploadCommonFile(w http.ResponseWriter, r *http.Request) {
 
 func RemoveMultipleFile(w http.ResponseWriter, r *http.Request) {
 	u, _ := getUser(r.FormValue("user"))
-	fmt.Println(u)
+
 	paths := r.FormValue("path")
 	var listPath []string
 	err := json.Unmarshal([]byte(paths), &listPath)
@@ -215,7 +213,7 @@ func RemoveMultipleFile(w http.ResponseWriter, r *http.Request) {
 
 func MoveMultipleFile(w http.ResponseWriter, r *http.Request) {
 	u, _ := getUser(r.FormValue("user"))
-	fmt.Println(u)
+
 	slug := r.FormValue("slug")
 	paths := r.FormValue("path")
 	var listPath []string
@@ -337,7 +335,7 @@ func ResizeImage(w http.ResponseWriter, r *http.Request) {
 
 func UsageCapacity(w http.ResponseWriter, r *http.Request) {
 	u, _ := getUser(r.FormValue("user"))
-	fmt.Println(u)
+
 	path := "./public/" + u.Dir
 	size := dirSize(path)
 	w.WriteHeader(http.StatusOK)
