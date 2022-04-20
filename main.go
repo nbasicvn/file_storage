@@ -13,10 +13,10 @@ import (
 )
 
 type User struct {
-	ApiKey  string `json:"apiKey"`
-	Dir     string `json:"dir"`
-	Active  int    `json:"active"`
-	Quota int64  `json:"quota"`
+	ApiKey string `json:"apiKey"`
+	Dir    string `json:"dir"`
+	Active int    `json:"active"`
+	Quota  int64  `json:"quota"`
 	Source int64  `json:"source"`
 }
 

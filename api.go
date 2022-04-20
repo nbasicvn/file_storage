@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/disintegration/imaging"
 	"github.com/gabriel-vasile/mimetype"
 	"github.com/gorilla/mux"
@@ -74,7 +73,7 @@ func UploadSingleFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func UploadTempFile(w http.ResponseWriter, r *http.Request) {
-	u, err := getUser(r.FormValue("user"))
+	_, err := getUser(r.FormValue("user"))
 
 	_ = r.ParseMultipartForm(32 << 20)
 
@@ -129,7 +128,7 @@ func UploadTempFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func UploadCommonFile(w http.ResponseWriter, r *http.Request) {
-	u, err := getUser(r.FormValue("user"))
+	_, err := getUser(r.FormValue("user"))
 
 	_ = r.ParseMultipartForm(32 << 20)
 
@@ -189,7 +188,7 @@ func UploadCommonFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func RemoveMultipleFile(w http.ResponseWriter, r *http.Request) {
-	u, _ := getUser(r.FormValue("user"))
+	getUser(r.FormValue("user"))
 
 	paths := r.FormValue("path")
 	var listPath []string
@@ -212,7 +211,7 @@ func RemoveMultipleFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func MoveMultipleFile(w http.ResponseWriter, r *http.Request) {
-	u, _ := getUser(r.FormValue("user"))
+	getUser(r.FormValue("user"))
 
 	slug := r.FormValue("slug")
 	paths := r.FormValue("path")
@@ -339,7 +338,7 @@ func UsageCapacity(w http.ResponseWriter, r *http.Request) {
 	path := "./public/" + u.Dir
 	size := dirSize(path)
 	w.WriteHeader(http.StatusOK)
-	_ = json.NewEncoder(w).Encode(Response{IsError: false, Quota: Quota{Size: size + u.Source * 1024 * 1024, Quota: u.Quota}})
+	_ = json.NewEncoder(w).Encode(Response{IsError: false, Quota: Quota{Size: size + u.Source*1024*1024, Quota: u.Quota}})
 }
 
 type Response struct {
@@ -348,7 +347,7 @@ type Response struct {
 	Data     string
 	ErrorMsg string
 	FileInfo FileInfo
-	Quota Quota
+	Quota    Quota
 }
 type Path struct {
 	Path string
